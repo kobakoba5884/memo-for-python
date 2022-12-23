@@ -1,0 +1,4 @@
+.docker
+
+# clear cach command 
+# git rm -r --cached . 
