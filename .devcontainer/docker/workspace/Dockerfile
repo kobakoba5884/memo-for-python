@@ -34,19 +34,6 @@ RUN apt-get update \
 RUN su ${USER_NAME} --command \
     'sudo git config --system --add safe.directory "/home/${USER_NAME}/workspace"'
 
-
-# ---------------------------------- sdkman for java ----------------------------------
-# https://sdkman.io/install
-ARG JAVA_VERSION
-ARG GRADLE_VERSION
-
-RUN su ${USER_NAME} --command \
-    'curl -s "https://get.sdkman.io" | bash \
-    && source "${HOME}/.sdkman/bin/sdkman-init.sh" \
-    && sdk install java "${JAVA_VERSION}" \
-    && sdk install gradle ${GRADLE_VERSION}'
-
-
 # ---------------------------------- pyenv for python ----------------------------------
 # dependencies for pyenv
 ARG PYENV_DEP="make build-essential libssl-dev zlib1g-dev \
@@ -72,15 +59,6 @@ RUN apt-get install -y --no-install-recommends ${PYENV_DEP} \
     && pyenv global "${PYTHON_VERSION}" \
     '
 
-# ---------------------------------- latest c c++ compiler ----------------------------------
-# https://ja.linuxcapable.com/how-to-install-gcc-compiler-on-ubuntu-22-04-lts/
-# default gcc g++ version
-ARG LATEST_C_VERSION
-
-RUN sudo apt-get -y install gcc-${LATEST_C_VERSION} g++-${LATEST_C_VERSION} \
-    && sudo update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-${LATEST_C_VERSION} ${LATEST_C_VERSION} \
-    && update-alternatives --install /usr/bin/g++ g++ /usr/bin/g++-${LATEST_C_VERSION} ${LATEST_C_VERSION}
-
 # ---------------------------------- set up language ----------------------------------
 # setup locale https://stackoverflow.com/a/55077451/13723015
 ARG LOCALE
@@ -90,25 +68,4 @@ RUN apt-get -y install locales \
     && echo "${LOCALE} UTF-8" >> /etc/locale.gen \
     && echo "LANG=${LOCALE}" > /etc/locale.conf \
     && locale-gen ${LOCALE}
-
-# ---------------------------------- nvm for javascript ----------------------------------
-# default node version
-ARG NODE_VERSION
-
-RUN su ${USER_NAME} --command \
-    'curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.1/install.sh | bash \
-    && source ~/.nvm/nvm.sh \
-    && nvm install "${NODE_VERSION}" \
-    && nvm alias default "${NODE_VERSION}" \
-    && nvm use default'
-
-# ---------------------------------- aws cli ----------------------------------
-
-ARG ZIP_FILE=awscliv2.zip
-
-RUN apt-get install -y less \
-    && curl https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip -o ${ZIP_FILE} \
-    && unzip ${ZIP_FILE}  \
-    && ./aws/install \
-    && rm -f ${ZIP_FILE}
 
