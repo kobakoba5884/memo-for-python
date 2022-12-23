@@ -1,5 +1,5 @@
 {
-    "name": "workspace",
+    "name": "workspace-for-python",
     "dockerComposeFile": ["docker-compose.yml"],
     "service": "workspace",
     "workspaceFolder": "/home/vscode/workspace",
@@ -21,9 +21,6 @@
       "liveshare.autoShareTerminals": true
     },
     "extensions": [
-		"vscjava.vscode-java-pack",
-		"vscjava.vscode-gradle",
-		"vscjava.vscode-spring-initializr",
 		"rangav.vscode-thunder-client",
 		"mtxr.sqltools",
 		"mhutchie.git-graph",

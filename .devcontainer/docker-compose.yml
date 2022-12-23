@@ -23,7 +23,7 @@ services:
       - ../:/home/${USER_NAME:-vscode}/workspace:cached
       - ~/.aws:/home/${USER_NAME:-vscode}/.aws
     ports:
-      - 5555:5555
+      - 8181:8181
 
   postgres:
     container_name: ${PROJECT_NAME:-java}-postgres
@@ -33,7 +33,7 @@ services:
       POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-postgres}
       POSTGRES_DB: ${POSTGRES_DB:-dev}
     ports:
-      - ${POSTGRES_PORT:-5432}:5432
+      - ${POSTGRES_PORT:-1111}:5432
     volumes:
       - ../.docker/postgres:/var/lib/postgresql/data/
     restart: unless-stopped
@@ -49,7 +49,7 @@ services:
     volumes:
       - ../.docker/pgamin4_data:/var/lib/pgadmin
     ports:
-      - 8888:80
+      - 2222:80
     depends_on:
       - postgres
   
@@ -59,7 +59,7 @@ services:
     image: mysql:8.0
     command: --default-authentication-plugin=mysql_native_password
     ports:
-      - ${MYSQL_PORT:-3306}:3306
+      - ${MYSQL_PORT:-3333}:3306
     volumes:
       - ../.docker/mysql_data:/var/lib/mysql
     environment:
