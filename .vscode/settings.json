@@ -24,5 +24,6 @@
             "username": "mysql",
             "password": "mysqlPassword"
         }
-    ]
+    ],
+    "glassit.alpha": 220
 }
