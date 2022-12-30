@@ -42,6 +42,7 @@ ARG PYENV_DEP="make build-essential libssl-dev zlib1g-dev \
 
 # default python version
 ARG PYTHON_VERSION
+ARG SECOUND_PYTHON_VERSION
 
 ENV PYENV_ROOT=${HOME}/.pyenv
 
@@ -57,6 +58,7 @@ RUN apt-get install -y --no-install-recommends ${PYENV_DEP} \
     && export PATH=${PYENV_ROOT}/bin:${PATH} \
     && pyenv install "${PYTHON_VERSION}" \
     && pyenv global "${PYTHON_VERSION}" \
+    && pyenv install "${SECOUND_PYTHON_VERSION}" \
     '
 
 # ---------------------------------- set up language ----------------------------------
