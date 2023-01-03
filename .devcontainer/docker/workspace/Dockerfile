@@ -11,7 +11,7 @@ LABEL version="1.0"
 LABEL description="my-workspace"
 
 # general packages
-ARG PKG="vim curl unzip zip sudo tzdata git"
+ARG PKG="vim curl unzip zip sudo tzdata git cron"
 
 SHELL ["/bin/bash", "-c"]
 
@@ -71,3 +71,4 @@ RUN apt-get -y install locales \
     && echo "LANG=${LOCALE}" > /etc/locale.conf \
     && locale-gen ${LOCALE}
 
+# ---------------------------------- set up cron ----------------------------------

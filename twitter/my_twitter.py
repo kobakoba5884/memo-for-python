@@ -31,7 +31,9 @@ class my_twitter:
         print(f'created tweet({tweet_text})')
         
     def like_tweet(self, tweet_id):
-        return self.twitter_client.like(tweet_id)
+        response = self.twitter_client.like(tweet_id)
+        print(f'liked tweet({tweet_id})')
+        return response
     
 
 def check_bot(tweets_data):
